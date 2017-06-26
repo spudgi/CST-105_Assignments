@@ -61,7 +61,7 @@ public class Congrats {
 		btnExit.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Home nw = new Home();
+				Goodbye nw = new Goodbye();
 				nw.open();
 			}
 		});
