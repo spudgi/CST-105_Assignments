@@ -1,3 +1,6 @@
+//Caleb Miller//
+	//CST-105//
+		//20170614//
 import java.util.Scanner;
 public class Area {
 	public static void main(String[] args) {
