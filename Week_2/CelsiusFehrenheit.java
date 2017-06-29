@@ -1,3 +1,6 @@
+//Caleb Miller//
+	//CST-105//
+		//20170623//
 import java.util.Scanner;
 public class CelsiusFehrenheit {
 	private static Scanner s;

@@ -1,3 +1,6 @@
+//Caleb Miller//
+	//CST-105//
+		//20170621//
 import java.util.Scanner;
 public class SumOfNmbers { 
 	public static void main(String args[]) { 

@@ -1,3 +1,6 @@
+//Caleb Miller//
+	//CST-105//
+		//20170621//
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
