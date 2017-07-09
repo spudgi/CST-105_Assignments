@@ -1,0 +1,35 @@
+Programming Exercise 5 CheckList
+
+Code file includes student's name and statement of own work
+0 - Missing
+1 - Present but submitted in an incorrect format, e.g. not a .png file
+2 - Correctly submitted and nicely formatted.
+Program that reads text from a file
+0 - Missing/incorrect
+1 - Present, but has some issues
+3 - Correct
+Create a 2 dimensional character array that is 20 X 45.
+0 - Missing
+1 - Incorrect (size is wrong or array is not a char array, or array list is used instead of an array)
+3 - Correct
+Store the characters read in your array in row major order
+0 - Missing
+1 - Possible bounds error, but attempted
+3- Correct
+Fill any unused spaces in your 2-D array with the '@' character. If you have more characters than space, ignore the excess characters.
+0 – Missing
+1 - Incorrect
+3 - Correct
+
+Extract characters from your array in column-major order (pull from column 0 first, then column 1, etc...). Build a new string as you extract the characters.
+0 – Missing
+1 - Incorrect
+3 - Correct
+
+Display the new string.
+0 – Missing
+1 - Incorrect
+3 - Correct
+
+Total points earned ____ multiplied by 2.5 =_______ (Final Score).
+	
