@@ -22,12 +22,14 @@ public class TwoDArray {
 		}
 		while(fileInput.hasNextLine()) {
 			String line = fileInput.nextLine();
-			arrays = new char[20][45];
-			for (char row = 0; row < 20; row++) {
-				for (char col = 0; col < 45; col++) {
-				System.out.print(arrays[row][col]);
+			line = line.replace(" ", "@");
+			int row = 20;
+			int col = 45;
+			String[][] arrays = new String[row][col];
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < col; j++) {
 				}
-			System.out.println(line);
+			System.out.println(arrays);
 			}
 			
 		}
