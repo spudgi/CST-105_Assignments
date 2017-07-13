@@ -109,24 +109,9 @@ public class PlayerManager<players> {
 	    // Reference to the main application.
 	    private Main main;
 
-	    /**
-	     * The constructor.
-	     * The constructor is called before the initialize() method.
-	     */
 	    public PlayerOverviewController() {
 	    }
 
-	    /**
-	     * Initializes the controller class. This method is automatically called
-	     * after the fxml file has been loaded.
-	     */
-	   
-
-	    /**
-	     * Is called by the main application to give a reference back to itself.
-	     * 
-	     * @param main
-	     */
 	    public void setMainApp(Main main) {
 	        this.main = main;
 

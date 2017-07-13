@@ -3,7 +3,6 @@ package application;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -23,14 +22,7 @@ public class Main extends Application {
         showPlayerOverview();
     }
 
-    /**
-     * Initializes the root layout.
-     */
-    
-
-    /**
-     * Shows the person overview inside the root layout.
-     */
+   
     public void showPlayerOverview() {
         try {
             // Load person overview.
@@ -45,10 +37,7 @@ public class Main extends Application {
         }
     }
 
-    /**
-     * Returns the main stage.
-     * @return
-     */
+   
     public Stage getPrimaryStage() {
         return primaryStage;
     }
