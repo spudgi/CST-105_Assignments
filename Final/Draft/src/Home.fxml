@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
@@ -9,28 +10,30 @@
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab text="HOME">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="479.0" fitWidth="843.0" layoutX="-21.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="463.0" fitWidth="821.0" layoutX="-17.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@application/CST-Draft.PNG" />
                      </image>
                   </ImageView>
-               </children></AnchorPane>
-      </content>
+               </children>
+            </AnchorPane>
+         </content>
     </Tab>
     <Tab text="MY TEAM">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="472.0" fitWidth="809.0" layoutX="-4.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="463.0" fitWidth="821.0" layoutX="-17.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@application/CST-Draft.PNG" />
                      </image>
                   </ImageView>
-               </children></AnchorPane>
-      </content>
+               </children>
+            </AnchorPane>
+         </content>
     </Tab>
       <Tab text="AVAILABLE PLAYERS">
         <content>
@@ -44,6 +47,20 @@
                </children>
             </AnchorPane>
         </content>
+      </Tab>
+      <Tab text="Player Maker">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="463.0" fitWidth="821.0" layoutX="-17.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@application/CST-Draft.PNG" />
+                     </image>
+                  </ImageView>
+                  <ListView id="Player List" layoutX="231.0" layoutY="198.0" prefHeight="233.0" prefWidth="553.0" />
+               </children>
+            </AnchorPane>
+         </content>
       </Tab>
   </tabs>
 </TabPane>
