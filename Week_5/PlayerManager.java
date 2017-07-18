@@ -4,22 +4,18 @@
 			//I cant believe how complicated I had it at the beginning of the week!
 
 package application;
-
 public class PlayerManager {
-	
 PlayerManager[] Players = new PlayerManager[6];
-	
     public String toString() {
 		String outputText = "";
-    	for(int x = 0; x< Players.length;x++) {
-    		outputText += Players[x].toString() + "\n";
+    	for(int i = 0; i < Players.length; i++) {
+    		outputText += Players[i].toString() + "\n";
     	}
     	return outputText;
     }
-	
 	public PlayerManager() {
-		for(int x = 0; x< Players.length;x++) {
-			Players[x] = new PlayerManager();
+		for(int i = 0; i < Players.length; i++) {
+			Players[i] = new PlayerManager();
 		}
 	}
 }
