@@ -13,8 +13,8 @@ public class NFLPlayer {
 	private int Power,Agility,Yardage,Speed,Fumbles,Evasive,Hands,Blocking,Coverage;
 	private String[] firstNames = {"Arden","Sam","Harold","Mason","Derwin","Christian","Derrius","Saquon","Courtland","Tarvarus","James","Josh","Minkah","Tyquan ","Mike ","Connor ","Bradley ","Deon ","Luke ","Derrick ","Christian ","Martinas ","Lamar ","Malik ","Jaire ","Vita ","Calvin ","Jerome ","Mitch ","Micah ","Orlando ","Royce ","Josh ","Quenton ","Baker ","Marcus ","Cameron ","Ronald ","Tyrone ","Antonio ","Nick ","Josh ","Maurice ","Equanimeous ","Duke ","Da'Shawn ","Kendall ","Auden ","Bo ","Dre'Mont ","Martez ","Jake ","Armani ","Marquis ","Quin ","Davin ","Damian ","Parris ","Sony ","Adonis ","Mason ","Sam ","Mike ","Billy ","Dante ","Myles ","Clelin ","Carlton ","Akrum ","Iman ","Jaylon ","Ronnie ","Kalen ","Quinton ","Mark ","Anthony ","Mike ","Jordan ","Jarrett ","Frank ","Tegray ","Larry ","Damien ","Troy ","Porter ","Lavon ","Byron ","Godwin ","Dorance  ","Jamar ","Mike ","Lowell ","Reginald  Jr.","Deondre ","Azeem ","Da'Ron ","Trey ","Trey ","Tony ","Jaylen "};
 	private String[] lastNames = {"Key","Darnold","Landry","Rudolph","James","Wilkins","Guice","Barkley","Sutton","McFadden","Washington","Rosen","Fitzpatrick","Lewis","McGlinchey","Williams","Chubb","Cain","Falk","Nnadi","Kirk","Rankin","Jackson","Jefferson","Alexander","Vea","Ridley","Baker","Hyatt","Kiser","Brown","Freeman","Sweat","Nelson","Mayfield","Allen","Smith","Jones II","Crowder","Callaway","Chubb","Allen","Hurst","St. Brown","Ejiofor","Hand","Joseph","Tate","Scarbrough","Jones","Ivey","Browning","Watts","Haynes","Blanding","Bellamy","Prince","Campbell","Michel","Alexander","Cole","Hubbard","Gesicki","Price","Pettis","Gaskin","Ferrell","Davis","Wadley","Marshall","Ferguson","Harrison","Ballage","Flowers","Andrews","Averett","Weber","Thomas","Stidham","Ragnow","Scales","Allan Jr.","Harris","Fumagalli","Gustin","Coleman","Cowart","Igwebuike","Armstrong Jr.","Summers","McCray","Lotulelei","Kahlil McKenzie Jr.","Francois","Victor","Payne","Adams","Marshall","Brown","Smith"};
-	private String[] positionList = {"Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"};
-	private String[] collegeList = {"Alabama","Arizona State","Arkansas","Auburn","Boston College","Clemson","Connecticut","Florida","Florida State","Georgia","Harvard","Indiana","Iowa","Kansas","Louisiana Tech","Louisville","LSU","Maryland","Michigan","Mississippi State","NC State","Northwestern","Notre Dame","Ohio State","Oklahoma","Oklahoma State","Ole Miss","Oregon","Penn State","South Florida","Southern California","Southern Methodist","Tennessee","Texas","Texas A&M","UCLA","Utah","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","Wisconsin","Wyoming"};
+	private String[] playerPosition = {"Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"};
+	private String[] playerCollege = {"Alabama","Arizona State","Arkansas","Auburn","Boston College","Clemson","Connecticut","Florida","Florida State","Georgia","Harvard","Indiana","Iowa","Kansas","Louisiana Tech","Louisville","LSU","Maryland","Michigan","Mississippi State","NC State","Northwestern","Notre Dame","Ohio State","Oklahoma","Oklahoma State","Ole Miss","Oregon","Penn State","South Florida","Southern California","Southern Methodist","Tennessee","Texas","Texas A&M","UCLA","Utah","Virginia","Virginia Tech","Wake Forest","Washington","Washington State","Wisconsin","Wyoming"};
 
     public String getName() { 
     	return Name; 
@@ -136,9 +136,9 @@ public class NFLPlayer {
 
     public NFLPlayer() {
     	setName(firstNames[randNum(0,99)] + " " + lastNames[randNum(0,99)]);
-    	setPosition(positionList[randNum(0,13)]);
+    	setPosition(playerPosition[randNum(0,13)]);
     	setTeam("2018 Prospects");
-    	setCollege(collegeList[randNum(0,45)]);
+    	setCollege(playerCollege[randNum(0,45)]);
     	setPower(randNum(1,100));
     	setAgility(randNum(1,100));
     	setYards(randNum(1,100));
