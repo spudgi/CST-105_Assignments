@@ -4,7 +4,7 @@
 			//I cant believe how complicated I had it at the beginning of the week!
 
 package application;
-public class PlayerManager {
+public class PlayerManager extends NFLPlayer {
 PlayerManager[] Players = new PlayerManager[6];
     public String toString() {
 		String outputText = "";
