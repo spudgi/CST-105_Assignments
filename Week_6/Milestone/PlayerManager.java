@@ -1,24 +1,17 @@
 //Caleb Miller
 	//CST-105
 		//20170716
-			//I cant believe how complicated I had it at the beginning of the week!
+			//I cannot get this to print out correctly....
 
 package application;
 
 import java.util.ArrayList;
 
-public class PlayerManager extends NFLPlayer {
-	public PlayerManager() {
-		ArrayList<NFLPlayer> NFLPlayer = new ArrayList<>();
+public class PlayerManager extends NFLPlayer {	
+		static ArrayList<OffensivePlayer> OffensivePlayer = new ArrayList<>();
 		
-		ArrayList<OffensivePlayer> offensivePlayers = new ArrayList<>();
+		ArrayList<DefensivePlayer> DefensivePlayer = new ArrayList<>();
 		
-		ArrayList<DefensivePlayer> defensivePlayers = new ArrayList<>();
-		
-		ArrayList<NFLPlayer> currentRoster = new ArrayList<>();
-		
-	}
-	
 PlayerManager[] Players = new PlayerManager[6];
     public String toString() {
 		String outputText = "";

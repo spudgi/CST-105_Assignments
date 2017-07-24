@@ -29,7 +29,7 @@ public abstract class DefensivePlayer extends NFLPlayer {
 		this.Interceptions = Interceptions;
 	}
 	
-	public int getIntercetpions() {
+	public int getInterceptions() {
 		return this.Interceptions;
 	}
 	
@@ -64,6 +64,11 @@ public abstract class DefensivePlayer extends NFLPlayer {
 	public int getSafties() {
 		return this.Safties;
 	}
+	
+	@Override
+	public String toString() {
+    	return "\nPlayer: " + getName() + "\nPosition: " + getPosition() + "\nTeam: " + getTeam() + "\nCollege: " + getCollege() + "\nTackles: " + getTackles() + "%" + "\nSacks " + getSacks() + "%" + "\nInterceptions: " + getInterceptions() + "%" + "\nReturn TD " + getreturnTD() + "%" + "\nForced Fumbles: " + getforcedFumbles() + "%" + "\nFumble Recovery: " + getfumbleRecovery() + "%" + "\nSafties: " + getSafties() + "%";
+    }
 	
 	public DefensivePlayer(String Name, String Position , int Tackles, int Sacks, int Interceptions, int returnedTD, int forcedFumbles, int fumbleRecovery, int Safties) {
 

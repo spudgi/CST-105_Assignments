@@ -1,7 +1,7 @@
 //Caleb Miller
 	//CST-105
 		//20170716
-			//I love coding!! It is so much fun! 
+			//The further I go the more lost I become in this...
 
 package application;
 

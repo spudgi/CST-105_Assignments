@@ -1,10 +1,17 @@
 //Caleb Miller
 	//CST-105
 		//20170716
-			//I cant believe how complicated I had it at the beginning of the week!
+			//I cannot get this to print out correctly....
 
 package application;
-public class PlayerManager extends NFLPlayer {
+
+import java.util.ArrayList;
+
+public class PlayerManager extends NFLPlayer {	
+		static ArrayList<OffensivePlayer> OffensivePlayer = new ArrayList<>();
+		
+		ArrayList<DefensivePlayer> DefensivePlayer = new ArrayList<>();
+		
 PlayerManager[] Players = new PlayerManager[6];
     public String toString() {
 		String outputText = "";
@@ -13,9 +20,4 @@ PlayerManager[] Players = new PlayerManager[6];
     	}
     	return outputText;
     }
-	public PlayerManager() {
-		for(int i = 0; i < Players.length; i++) {
-			Players[i] = new PlayerManager();
-		}
-	}
 }

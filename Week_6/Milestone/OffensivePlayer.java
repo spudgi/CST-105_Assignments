@@ -121,6 +121,11 @@ public abstract class OffensivePlayer extends NFLPlayer {
     	return randomNumber.nextInt(high) + low;
     }
     
+    @Override
+	public String toString() {
+    	return "\nPlayer: " + getName() + "\nPosition: " + getPosition() + "\nTeam: " + getTeam() + "\nCollege: " + getCollege() + "\nPassing Touchdowns: " + getpassingTouchdowns() + "%" + "\nInterceptions Thrown " + getInterceptionsThrown() + "%" + "\nPass Attempts: " + getPassAttempts() + "%" + "\nPass Completions " + getPassCompletions() + "%" + "\nCompletion Percent: " + getCompletionPercent() + "%" + "\nRushing Attempts: " + getRushingAttempts() + "%" + "\nYards Per Carry: " + getYardsPerCarry() + "%";
+    }
+    
     public OffensivePlayer(String Name, String Position , int passintTouchdowns, int interceptionsThrown, int passAttempts, int passCompletions,double completionPercent, int passingYards, int rushingYards, int rushingAttempts,double yardsPerCarry, int rushingTouchdowns, int fumbles, int receivingYards, int receptions,double yardsPerCatch, int receivingTouchdowns) {
 
     	setName(Name);
