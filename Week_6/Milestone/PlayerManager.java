@@ -1,23 +1,39 @@
 //Caleb Miller
 	//CST-105
-		//20170716
+		//20170721
 			//I cannot get this to print out correctly....
 
 package application;
 
 import java.util.ArrayList;
 
-public class PlayerManager extends NFLPlayer {	
-		static ArrayList<OffensivePlayer> OffensivePlayer = new ArrayList<>();
+public class PlayerManager {	
+		OffensivePlayer[] offensivePlayers = new OffensivePlayer[6];
+		DefensivePlayer[] defensivePlayers = new DefensivePlayer[6];
+		ArrayList<NFLPlayer> Players = new ArrayList<NFLPlayer>();
 		
-		ArrayList<DefensivePlayer> DefensivePlayer = new ArrayList<>();
-		
-PlayerManager[] Players = new PlayerManager[6];
     public String toString() {
 		String outputText = "";
-    	for(int i = 0; i < Players.length; i++) {
-    		outputText += Players[i].toString() + "\n";
+    	for(int i = 0; i < Players.size(); i++) {
+    		outputText += Players.get(i).toString() + "\n";
     	}
     	return outputText;
     }
+    
+    public PlayerManager() {
+    	for(int i = 0; i < offensivePlayers.length; i++) {
+    		Players.add(createOffensivePlayer.toString());
+    	}
+    	for(int i = 0; i < defensivePlayers.length; i++) {
+    		Players.add(createDefensivePlayer.toString());
+    	}
+    }
+    
+    public OffensivePlayer createOffensivePlayer() {
+    	return new OffensivePlayer();
+    }
+    
+    public DefensivePlayer createDefensivePlayer() {
+    	return new DefensivePlayer();
+    }    
 }

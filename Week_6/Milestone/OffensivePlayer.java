@@ -1,148 +1,162 @@
+//Caleb Miller
+	//CST-105
+		//20170721
+			//cant figure it out
 package application;
 
-import java.util.Random;
-
-public abstract class OffensivePlayer extends NFLPlayer {
-	private int passingTouchdowns,interceptionsThrown,passAttempts,passCompletions,passingYards,rushingYards,rushingAttempts,rushingTouchdowns,fumbles,receivingYards,receptions,receivingTouchdowns;
-    private double completionPercent = 0;
-    private double yardsPerCarry = 0;
-    private double yardsPerCatch = 0;
-	private String Name;
-	private String Position;
-	private int Yardage;
-	private int Fumbles;
-    
-    public OffensivePlayer() {
-    	super();
+public class OffensivePlayer extends NFLPlayer {
+		private String[] positionList = {"Offensive Line","Quarter Back","Running Back","Wide Receiver"};
+	
+	public String getName() { 
+    	return Name; 
     }
     
-    public void setPassingTouchdowns(int passingTouchdowns) {
-    	this.passingTouchdowns = passingTouchdowns;
+    public void setName(String Name) { 
+    	this.Name = Name; 
     }
     
-    public int getpassingTouchdowns() {
-    	return this.passingTouchdowns;
+    public String getNFLTeam() { 
+    	return NFLTeam; 
     }
     
-    public void setInterceptionsThrown(int interceptionsThrown) {
-    	this.interceptionsThrown = interceptionsThrown;
+    public void setNFLTeam(String NFL_Team) { 
+    	this.NFLTeam = NFL_Team; 
     }
     
-    public int getInterceptionsThrown() {
-    	return this.interceptionsThrown;
-	}
-    
-    public int setPassAttempts(int passAttempts) {
-    	return this.passAttempts = passAttempts;
+    public String getPosition() { 
+    	return Position; 
     }
     
-    public int getPassAttempts() {
-    	return this.passAttempts;
+    public void setPosition(String Position) { 
+    	this.Position = Position; 
     }
     
-    public void setPassCompletions(int passCompletions) {
-    	this.passCompletions = passCompletions;
+    public String getTeam() { 
+    	return Team; 
     }
     
-    public int getPassCompletions() {
-    	return this.passCompletions;
+    public void setTeam(String Team) { 
+    	this.Team = Team; 
     }
     
-    public void setCompletionPercent(double completionPercent) {
-    	this.completionPercent = completionPercent;
+    public String getCollege() { 
+    	return College; 
     }
     
-    public double getCompletionPercent() {
-    	return completionPercent;
+    public void setCollege(String College) { 
+    	this.College = College; 
     }
     
-    public void setRushingAttempts(int rushingAttempts) {
-    	this.rushingAttempts = rushingAttempts;
+    public int getPower() { 
+    	return Power; 
     }
     
-    public int getRushingAttempts() {
-    	return rushingAttempts;
+    public void setPower(int Power) { 
+    	this.Power = Power; 
     }
     
-    public void setYardsPerCarry(double yardsPerCarry) {
-    	this.yardsPerCarry = yardsPerCarry;
+    public int getAgility() { 
+    	return Agility; 
     }
     
-    public double getYardsPerCarry() {
-    	return yardsPerCarry; 
+    public void setAgility(int Agility) { 
+    	this.Agility = Agility; 
     }
     
-    public void setPassingYards(int passingYards) {
-    	this.passingYards = passingYards;
+    public int getYards() { 
+    	return Yardage; 
     }
     
-    public int getPassingYards() {
-    	return this.passingYards;
+    public void setYards(int Yardage) { 
+    	this.Yardage = Yardage; 
     }
     
-    public void setRushingTouchdowns(int rushingTouchdowns) {
-    	this.rushingTouchdowns = rushingTouchdowns;
+    public int getSpeed() { 
+    	return Speed; 
     }
     
-    public int getRushingTouchdowns() {
-    	return this.rushingTouchdowns;
+    public void setSpeed(int Speed) { 
+    	this.Speed = Speed; 
     }
     
-    public void setReceivingYards(int receivingYards) {
-    	this.receivingYards = receivingYards;
+    public int getFumbles() { 
+    	return Fumbles; 
     }
     
-    public int getReceivingYards() {
-    	return this.receivingYards;
+    public void setFumbles(int Fumbles) { 
+    	this.Fumbles = Fumbles; 
     }
     
-    public void setReceptions(int receptions) {
-    	this.receptions = receptions;
+    public int getEvasive() { 
+    	return Evasive; 
     }
     
-    public int getReceptions() {
-    	return this.receptions;
+    public void setEvasive(int Evasive) { 
+    	this.Evasive = Evasive; 
     }
     
-    public void setYardsPerCatch(double yardsPerCatch) {
-    	this.yardsPerCatch = yardsPerCatch;
+    public int getHands() { 
+    	return Hands; 
     }
     
-    public void setReceivingTouchdowns(int receivingTouchdowns) {
-    	this.receivingTouchdowns = receivingTouchdowns;
+    public void setHands(int Hands) { 
+    	this.Hands = Hands; 
     }
     
-    public int getReceivingTouchdowns() {
-    	return this.receivingTouchdowns;
+    public int getBlocking() { 
+    	return Blocking; 
     }
     
-    public int randNum(int low, int high) {
-    	Random randomNumber = new Random();
-    	return randomNumber.nextInt(high) + low;
+    public void setBlocking(int Blocking) { 
+    	this.Blocking = Blocking; 
     }
     
-    @Override
-	public String toString() {
-    	return "\nPlayer: " + getName() + "\nPosition: " + getPosition() + "\nTeam: " + getTeam() + "\nCollege: " + getCollege() + "\nPassing Touchdowns: " + getpassingTouchdowns() + "%" + "\nInterceptions Thrown " + getInterceptionsThrown() + "%" + "\nPass Attempts: " + getPassAttempts() + "%" + "\nPass Completions " + getPassCompletions() + "%" + "\nCompletion Percent: " + getCompletionPercent() + "%" + "\nRushing Attempts: " + getRushingAttempts() + "%" + "\nYards Per Carry: " + getYardsPerCarry() + "%";
+    public int getCoverage() { 
+    	return Coverage; 
     }
     
-    public OffensivePlayer(String Name, String Position , int passintTouchdowns, int interceptionsThrown, int passAttempts, int passCompletions,double completionPercent, int passingYards, int rushingYards, int rushingAttempts,double yardsPerCarry, int rushingTouchdowns, int fumbles, int receivingYards, int receptions,double yardsPerCatch, int receivingTouchdowns) {
-
-    	setName(Name);
-		setPosition(Position);
-		setPassingTouchdowns(passingTouchdowns);
-		setInterceptionsThrown(interceptionsThrown);
-		setPassAttempts(passAttempts);
-		setPassCompletions(passCompletions);
-		setCompletionPercent(completionPercent);
-		setYards(Yardage);
-		setRushingAttempts(rushingAttempts);
-		setYardsPerCarry(yardsPerCarry);
-		setRushingTouchdowns(rushingTouchdowns);
-		setFumbles(Fumbles);
-		setReceivingYards(receivingYards);
-		setReceptions(receptions);
-		setYardsPerCatch(yardsPerCatch);
-		setReceivingTouchdowns(receivingTouchdowns);
+    public void setCoverage(
+    		int Coverage) { 
+    	this.Coverage = Coverage; 
+    }
+    
+    public int getOverall() {
+    	return (Power + Agility + Yardage + Speed + Fumbles + Evasive + Hands + Blocking + Coverage) / 9;
+    }
+    
+    public String toString() {
+    	return "\nPlayer: " + getName() + "\nOffensive Position: " + getPosition() + "\nTeam: " + getTeam() + "\nCollege: " + getCollege() + "\nPower: " + getPower() + "%" + "\nAgility: " + getAgility() + "%" + "\nYardage: " + getYards() + "%" + "\nSpeed: " + getSpeed() + "%" + "\nOverall Average: " + getOverall() + "%";
+    }
+	
+	public OffensivePlayer() {
+    	setName(firstNames[randNum(0,99)] + " " + lastNames[randNum(0,99)]);
+    	setPosition(positionList[randNum(0,4)]);
+    	setTeam("2018 Prospects");
+    	setCollege(playerCollege[randNum(0,45)]);
+    	setPower(randNum(1,100));
+    	setAgility(randNum(1,100));
+    	setYards(randNum(1,100));
+    	setSpeed(randNum(1,100));
+    	setFumbles(randNum(1,100));
+    	setEvasive(randNum(1,100));
+    	setHands(randNum(1,100));
+    	setBlocking(randNum(1,100));
+    	setCoverage(randNum(1,100));
+    }
+    
+    public OffensivePlayer(String name, String position, String team, String college, int power, int agility, int yardage, int speed, int fumbles, int evasive, int hands, int blocking, int coverage){
+    	setName(name);
+    	setPosition(position);
+    	setTeam(team);
+    	setCollege(college);
+    	setPower(power);
+    	setAgility(agility);
+    	setYards(yardage);
+    	setSpeed(speed);
+    	setFumbles(fumbles);
+    	setEvasive(evasive);
+    	setHands(hands);
+    	setBlocking(blocking);
+    	setCoverage(coverage);    	
     }
 }
