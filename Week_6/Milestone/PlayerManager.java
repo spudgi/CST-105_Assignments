@@ -8,9 +8,9 @@ package application;
 import java.util.ArrayList;
 
 public class PlayerManager {	
-		OffensivePlayer[] offensivePlayers = new OffensivePlayer[6];
-		DefensivePlayer[] defensivePlayers = new DefensivePlayer[6];
-		ArrayList<NFLPlayer> Players = new ArrayList<NFLPlayer>();
+		static OffensivePlayer[] offensivePlayer = new OffensivePlayer[11];
+		static DefensivePlayer[] defensivePlayer = new DefensivePlayer[11];
+		static ArrayList<NFLPlayer> Players = new ArrayList<NFLPlayer>();
 		
     public String toString() {
 		String outputText = "";
@@ -20,20 +20,23 @@ public class PlayerManager {
     	return outputText;
     }
     
-    public PlayerManager() {
-    	for(int i = 0; i < offensivePlayers.length; i++) {
-    		Players.add(createOffensivePlayer.toString());
-    	}
-    	for(int i = 0; i < defensivePlayers.length; i++) {
-    		Players.add(createDefensivePlayer.toString());
-    	}
-    }
+    public OffensivePlayer makeoffensivePlayer() {
+    		return new OffensivePlayer();
+    	
+    }  
     
-    public OffensivePlayer createOffensivePlayer() {
-    	return new OffensivePlayer();
-    }
+    public DefensivePlayer makedefensivePlayer() {
+    		return new DefensivePlayer();
+	}
+    	
     
-    public DefensivePlayer createDefensivePlayer() {
-    	return new DefensivePlayer();
-    }    
+	    public PlayerManager() {
+	    	for(int i = 0; i < offensivePlayer.length; i++) {
+				Players.add(makeoffensivePlayer());
+	    	}
+	    	
+	    	for(int i = 0; i < defensivePlayer.length; i++) {
+	    		Players.add(makedefensivePlayer());
+	    	}
+	    }
 }
