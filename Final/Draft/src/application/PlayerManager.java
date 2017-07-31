@@ -1,121 +1,53 @@
+//Caleb Miller
+	//CST-105
+		//20170721
+			//I cannot get this to print out correctly....
+
 package application;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import javafx.beans.property.StringProperty;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-
-public class PlayerManager<players> {
-	 
-
-	public static void main(String[] args) {
-		ArrayList players = new ArrayList();
-		addPlayer(players);
+public class PlayerManager {	
+		static OffensivePlayer[] offensivePlayer = new OffensivePlayer[11];
+		static DefensivePlayer[] defensivePlayer = new DefensivePlayer[11];
+		static ArrayList<NFLPlayer> Players = new ArrayList<NFLPlayer>();
 		
-
-	}
-	
-	public PlayerManager() {
-		int QuarterBack;
-		int RunningBack;
-		int WideReceiver;
-		int OffensiveLine;
-		int Tackle;
-		int DefensiveLine;
-		int DefensiveEnd;
-		int DefensiveBack;
-		int player;
-		int position;
-		int name;
-		
-	
-	}
-	
-	private static class player {
-		
-		public int getPlayer() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		public int getPosition() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-	}
-	
-	private StringProperty player;
-	private StringProperty position;
-	private StringProperty name;
-	private void position(String players) {
-		player = this.getPlayer();
-		position = this.getPosition();
-		name = this.getName();
-	}
-	
-	public StringProperty getName() {
-		return getName();
-	}
-	
-	public StringProperty getPlayer() {
-		return getPlayer();
-	}
-	
-	public StringProperty getPosition() {
-		return getPosition();
-	}
-	
-	private static void addPlayer(ArrayList players) {
-        for (int i = 0; i < 2; i++) {
-            Scanner addPlayer = new Scanner(System.in);
-            String player = (addPlayer.nextLine());
-
-            Scanner addPosition = new Scanner(System.in);
-            String position = (addPosition.nextLine());
-            
-            Scanner addName = new Scanner(System.in);
-            String name = (addName.nextLine());
-
-            players.add(new player());
-        }
-        System.out.println(players);
+    public String toString() {
+		String outputText = "";
+    	for(int i = 0; i < Players.size(); i++) {
+    		outputText += Players.get(i).toString() + "\n";
+    	}
+    	return outputText;
     }
-	
-	public class PlayerOverviewController {
-	    @FXML
-	    private ListView<players> player;
-
-	    @FXML
-	    private Label firstNameLabel;
-	    
-	    @FXML
-	    private Label lastNameLabel;
-	    
-	    @FXML
-	    private Label positionLabel;
-	    
-	    @FXML
-	    private Label TouchDownsLabel;
-	    
-	    @FXML
-	    private Label YardsLabel;
-	    
-	    @FXML
-	    private Label RecYardsLabel;
-
-	    // Reference to the main application.
-	    private Main main;
-
-	    public PlayerOverviewController() {
-	    }
-
-	    public void setMainApp(Main main) {
-	        this.main = main;
-
-
-	    }
+    
+    public static OffensivePlayer makeoffensivePlayer() {
+    		return new OffensivePlayer();
+    	
+    }  
+    
+    public static DefensivePlayer makedefensivePlayer() {
+    		return new DefensivePlayer();
 	}
+    	
+    
+	    public PlayerManager() {
+	    	for(int i = 0; i < offensivePlayer.length; i++) {
+				Players.add(makeoffensivePlayer());
+	    	}
+	    	
+	    	for(int i = 0; i < defensivePlayer.length; i++) {
+	    		Players.add(makedefensivePlayer());
+	    	}
+	    }
+
+		public void handle(ActionEvent e) {
+			makeoffensivePlayer();
+			
+		}
+		
+		public void handle1(ActionEvent t) {
+			makeoffensivePlayer();
+			
+		}
 }
