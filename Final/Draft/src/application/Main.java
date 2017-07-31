@@ -1,5 +1,7 @@
 package application;
-
+//Caleb Miller
+	//20170730
+		//This is my own product
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;

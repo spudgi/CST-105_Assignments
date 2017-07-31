@@ -1,3 +1,6 @@
+//Caleb Miller
+	//20170730
+		//This is my own product
 package application;
 
 import javafx.application.Application;
@@ -11,9 +14,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public abstract class ColorFont extends Application {
-	@Override // Override the start method in the Application class
+	@Override 
 	public void start(Stage primaryStage) {
-	// Create a pane to hold the circle
+	
 		Pane pane = new StackPane();
 		Label label = new Label("JavaFX");
 		label.setFont(Font.font("Times New Roman",FontWeight.BOLD, FontPosture.ITALIC, 20));
@@ -21,11 +24,11 @@ public abstract class ColorFont extends Application {
 		label1.setFont(Font.font("SanSerif",FontWeight.BOLD, FontPosture.ITALIC, 20));
 		pane.getChildren().addAll(label,label1);
 		
-		// Create a scene and place it in the stage
+
 		Scene scene = new Scene(pane, 200, 250);
-		primaryStage.setTitle("FontDemo"); // Set the stage title
-		primaryStage.setScene(scene); // Place the scene in the stage
-		primaryStage.show(); // Display the stage
+		primaryStage.setTitle("FontDemo");
+		primaryStage.setScene(scene); 
+		primaryStage.show(); 
 	}
 	
 	public static void main(String[] args) {
