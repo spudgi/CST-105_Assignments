@@ -29,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	
 	private TableView<NFLPlayer> table = new TableView<NFLPlayer>();
 
 	ObservableList<NFLPlayer> players = createPlayers();
@@ -39,7 +40,7 @@ public class Main extends Application {
 		
 		table.setEditable(false);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		table = createPlayerTable(table);
+		table = PlayerTable(table);
 
 		final VBox playerTable = new VBox();
 		playerTable.setSpacing(5);
@@ -50,7 +51,7 @@ public class Main extends Application {
 		pane.setCenter(playerTable);
 		pane.setBottom(draftControls(pane));
 
-		Scene scene = new Scene(pane, 1200, 700);
+		Scene scene = new Scene(pane, 1200, 750);
 		scene.getStylesheets().add("application.css");
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("NFL Draft");
@@ -60,74 +61,78 @@ public class Main extends Application {
 		updatePlayerTable(0);
 	}
 
-	@SuppressWarnings("unchecked")
-	public TableView<NFLPlayer> createPlayerTable(TableView<NFLPlayer> table) {
+	public TableView<NFLPlayer> PlayerTable(TableView<NFLPlayer> table) {
 
-		TableColumn<NFLPlayer, String> nflteamCol = new TableColumn<>("NFL Teams");
-		nflteamCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("NFLTeams"));
+		TableColumn<NFLPlayer, String> teamCol = new TableColumn<>("NFL Teams");
+		
+		teamCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("NFLTeam"));
 		
 		TableColumn<NFLPlayer, String> nameCol = new TableColumn<>("Name");
-		nameCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("lastNames"));
 		
-		nameCol.setMinWidth(25);
+		nameCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("Name"));
+		
+			nameCol.setMinWidth(25);
+		
 		TableColumn<NFLPlayer, String> positionCol = new TableColumn<>("Player Position");
-		positionCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("playerPosition"));
+		
+		positionCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("Position"));
 		
 		TableColumn<NFLPlayer, String> collegeCol = new TableColumn<>("Player College");
-		collegeCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("playerCollege"));
-		collegeCol.setMinWidth(75);
 		
-		table.getColumns().addAll(nflteamCol, nameCol, positionCol, collegeCol);
+		collegeCol.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("College"));
+		
+			collegeCol.setMinWidth(75);
+		
+		table.getColumns().addAll(teamCol, nameCol, positionCol, collegeCol);
+			
 		return table;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void createControls(BorderPane pane) {
 	
 		final HBox controls = new HBox();
 		controls.setSpacing(5);
 		controls.setPadding(new Insets(10, 10, 10, 10));
-		Separator separator = new Separator();
-		Separator separator2 = new Separator();
-		Separator separator3 = new Separator();
-		Separator separator4 = new Separator();
-		Separator separator5 = new Separator();
-		Separator separator6 = new Separator();
-		separator.setStyle("-fx-opacity: 0;");
-		separator2.setStyle("-fx-opacity: 0;");
-		separator3.setStyle("-fx-opacity: 0;");
-		separator4.setStyle("-fx-opacity: 0;");
-		separator5.setStyle("-fx-opacity: 0;");
-		separator6.setStyle("-fx-opacity: 0;");
-		ImageView logo = new ImageView(new Image("http://www.spudgi.com/wp-content/uploads/2017/07/CST-Draft.png",400, 200, true, true));
+		Separator sep = new Separator();
+		Separator sep2 = new Separator();
+		Separator sep3 = new Separator();
+		Separator sep4 = new Separator();
+		Separator sep5 = new Separator();
+		Separator sep6 = new Separator();
+		sep.setStyle("-fx-opacity: 0;");
+		sep2.setStyle("-fx-opacity: 0;");
+		sep3.setStyle("-fx-opacity: 0;");
+		sep4.setStyle("-fx-opacity: 0;");
+		sep5.setStyle("-fx-opacity: 0;");
+		sep6.setStyle("-fx-opacity: 0;");
+		ImageView logo = new ImageView(new Image("http://www.spudgi.com/wp-content/uploads/2017/07/CST-Draft.png",500, 200, true, true));
 		logo.setStyle("-fx-opacity: .87");
 		
-		@SuppressWarnings("unchecked")
-		ChoiceBox listOfPostions = new ChoiceBox(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
-		listOfPostions.getSelectionModel().selectFirst();
-		listOfPostions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-			
-					@Override
-					public void changed(ObservableValue<? extends Number> observableValue,Number number, Number number2) {
-						updatePlayerTable((int) number2);
-					}
-				});
-		
+		ChoiceBox cb = new ChoiceBox<String>(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
+		cb.getSelectionModel().selectFirst();
+		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+	
+			@Override
+			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+				updatePlayerTable((int) number2);
+			}
+		});
+
 		TextField searchField = new TextField("Search");
 		searchField.setPrefColumnCount(15);
 		searchField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			
-					@Override
-					public void changed(ObservableValue<? extends Boolean> arg0,Boolean arg1, Boolean arg2) {
-						if (searchField.getText().contains("Search")) {
-							searchField.setText("");
-						}
-					}
-				});
-		
+	
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0,Boolean arg1, Boolean arg2) {
+				if (searchField.getText().contains("Search")) {
+					searchField.setText("");
+				}
+			}
+		});
+
 		Button searchBtn = new Button("search");
 		searchBtn.setOnAction(new EventHandler<ActionEvent>() {
-			
+	
 			@Override
 			public void handle(ActionEvent e) {
 				if (searchField.getText() != ""|| searchField.getText() != "Search") {
@@ -135,71 +140,60 @@ public class Main extends Application {
 				}
 			}
 		});
-		
-		Button resetBtn = new Button("reset");
-		resetBtn.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0,Boolean arg1, Boolean arg2) {
-				searchField.setText("");
-				listOfPostions.getSelectionModel().selectFirst();
-				updatePlayerTable(0);
-			}
-		});
-		
-		controls.getChildren().addAll(listOfPostions, searchField, searchBtn,resetBtn, separator, separator2, separator3, separator4,separator5, separator6, logo);
+
+		controls.getChildren().addAll(cb, searchField, searchBtn, sep, sep2, sep3, sep4, sep5, sep6, logo);
 		pane.setTop(controls);
 	}
 	
 	public void updatePlayerTable(int i) {
 		
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players,p -> true);
+		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players, p -> true);
 		
 		switch (i) {
 		case 0:
 			filteredPlayers = new FilteredList<>(players, p -> true);
 			break;
 		case 1:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Center");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Center");
 			break;
 		case 2:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Cornerback");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Cornerback");
 			break;
 		case 3:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Defensive End");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Defensive End");
 			break;
 		case 4:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Defensive Tackle");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Defensive Tackle");
 			break;
 		case 5:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Kicker");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Kicker");
 			break;
 		case 6:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Guard");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Guard");
 			break;
 		case 7:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Linebacker");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Linebacker");
 			break;
 		case 8:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Offensive Tackle");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Offensive Tackle");
 			break;
 		case 9:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Punter");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Punter");
 			break;
 		case 10:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Quarterback");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Quarterback");
 			break;
 		case 11:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Running Back");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Running Back");
 			break;
 		case 12:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Safety");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Safety");
 			break;
 		case 13:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Tight End");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Tight End");
 			break;
 		case 14:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Wide Receiver");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Wide Receiver");
 			break;
 		}
 
@@ -210,53 +204,53 @@ public class Main extends Application {
 	
 	public void managePlayerTable(int i) {
 		
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players,p -> p.getNFLTeam() == "Drafted");
+		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players, p -> p.getNFLTeam() == "Drafted");
 
 		switch (i) {
 		case 0:
-			filteredPlayers = new FilteredList<>(players,p -> p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getNFLTeam() == "Drafted");
 			break;
 		case 1:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Center"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Center"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 2:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Cornerback"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Cornerback"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 3:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Defensive End"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Defensive End"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 4:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Defensive Tackle"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Defensive Tackle"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 5:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Kicker"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Kicker"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 6:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Guard"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Guard"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 7:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Linebacker"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Linebacker"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 8:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Offensive Tackle"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Offensive Tackle"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 9:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Punter"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Punter"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 10:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Quarterback"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Quarterback"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 11:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Running Back"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Running Back"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 12:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Safety"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Safety"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 13:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Tight End"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Tight End"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 14:
-			filteredPlayers = new FilteredList<>(players,p -> p.getPosition() == "Wide Receiver"&& p.getNFLTeam() == "Drafted");
+			filteredPlayers = new FilteredList<>(players, p -> p.getPosition() == "Wide Receiver"&& p.getNFLTeam() == "Drafted");
 			break;
 		}
 
@@ -266,15 +260,53 @@ public class Main extends Application {
 	}
 	
 	public void searchPlayerTable(String s) {
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players,p -> p.getPosition().toLowerCase().contains(s.toLowerCase()));		
+		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players, p -> p.getPosition().toLowerCase().contains(s.toLowerCase())|| p.getCollege().toLowerCase().contains(s.toLowerCase())|| p.getName().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam().toLowerCase().contains(s.toLowerCase()));
 		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(filteredPlayers);
 		table.setItems(sortedPlayers);
 	}
 
-	public void searchManagementTable(String s) {
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players,p -> p.getNFLTeam() == "Drafted"|| p.getNFLTeam() == "Drafted"|| p.getNFLTeam() == "Drafted"|| p.getNFLTeam() == "Drafted"&& p.getNFLTeam().toLowerCase().contains(s.toLowerCase()));
+	public void searchTable(String s) {
+		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(players, p -> p.getNFLTeam() == "Drafted"&& p.getPosition().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getCollege().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getName().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getNFLTeam().toLowerCase().contains(s.toLowerCase()));
 		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(filteredPlayers);
 		table.setItems(sortedPlayers);
+	}
+	
+	public HBox mainControls(BorderPane pane) {
+		
+		final HBox owner = new HBox();
+		owner.setSpacing(5);
+		owner.setPadding(new Insets(10, 10, 100, 10));
+		Button draftBtn = new Button("Remove Player");
+		draftBtn.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent e) {
+				NFLPlayer draftPlayer = table.getSelectionModel().getSelectedItem();
+				draftPlayer.setNFLTeam("2018 Prospects");
+				managePlayerTable(0);
+			}
+		});
+		
+		Separator sep = new Separator();
+		Separator sep2 = new Separator();
+		Separator sep3 = new Separator();
+		sep.setStyle("-fx-opacity: 0;");
+		sep2.setStyle("-fx-opacity: 0;");
+		sep3.setStyle("-fx-opacity: 0;");
+		Button teamBtn = new Button("Update Players");
+		teamBtn.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent e) {
+				createControls(pane);
+				pane.setBottom(draftControls(pane));
+				updatePlayerTable(0);
+			}
+		});
+		
+		owner.getChildren().addAll(draftBtn, sep, sep2, sep3, teamBtn);
+		
+		return owner;
 	}
 
 	public HBox draftControls(BorderPane pane) {
@@ -287,152 +319,101 @@ public class Main extends Application {
 			
 			@Override
 			public void handle(ActionEvent e) {
-				NFLPlayer draftPlayer = table.getSelectionModel()
-						.getSelectedItem();
+				NFLPlayer draftPlayer = table.getSelectionModel().getSelectedItem();
 				draftPlayer.setNFLTeam("Drafted");
 				updatePlayerTable(0);
 			}
 		});
 		
-		Separator separator = new Separator();
-		Separator separator2 = new Separator();
-		Separator separator3 = new Separator();
-		separator.setStyle("-fx-opacity: 0;");
-		separator2.setStyle("-fx-opacity: 0;");
-		separator3.setStyle("-fx-opacity: 0;");
-		Button teamBtn = new Button("Manage Team");
-		teamBtn.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent e) {
-				createManagementControls(pane);
-				managePlayerTable(0);
-				pane.setBottom(manageControls(pane));
-			}
-		});
-		
-		draft.getChildren().addAll(draftBtn, separator, separator2, separator3,
-				teamBtn);
-		return draft;
-	}
-
-	public HBox manageControls(BorderPane pane) {
-		
-		final HBox management = new HBox();
-		management.setSpacing(5);
-		management.setPadding(new Insets(10, 10, 100, 10));
-		Button draftBtn = new Button("Remove Player");
-		draftBtn.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent e) {
-				NFLPlayer draftPlayer = table.getSelectionModel()
-						.getSelectedItem();
-				draftPlayer.setNFLTeam("2018 Prospects");
-				managePlayerTable(0);
-			}
-		});
-		
-		Separator separator = new Separator();
-		Separator separator2 = new Separator();
-		Separator separator3 = new Separator();
-		separator.setStyle("-fx-opacity: 0;");
-		separator2.setStyle("-fx-opacity: 0;");
-		separator3.setStyle("-fx-opacity: 0;");
-		Button teamBtn = new Button("Draft Players");
+		Separator sep = new Separator();
+		Separator sep2 = new Separator();
+		Separator sep3 = new Separator();
+		sep.setStyle("-fx-opacity: 0;");
+		sep2.setStyle("-fx-opacity: 0;");
+		sep3.setStyle("-fx-opacity: 0;");
+		Button teamBtn = new Button("My Team");
 		teamBtn.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent e) {
 				createControls(pane);
-				pane.setBottom(draftControls(pane));
-				updatePlayerTable(0);
+				managePlayerTable(0);
+				pane.setBottom(mainControls(pane));
 			}
 		});
 		
-		management.getChildren().addAll(draftBtn, separator, separator2,separator3, teamBtn);
-		return management;
+		draft.getChildren().addAll(draftBtn, sep, sep2, sep3, teamBtn);
+		return draft;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void createManagementControls(BorderPane pane) {
+	public void userControls(BorderPane pane) {
 		
 		final HBox controls = new HBox();
 		controls.setSpacing(5);
 		controls.setPadding(new Insets(10, 10, 10, 10));
-		Separator separator = new Separator();
-		Separator separator2 = new Separator();
-		Separator separator3 = new Separator();
-		Separator separator4 = new Separator();
-		Separator separator5 = new Separator();
-		Separator separator6 = new Separator();
-		separator.setStyle("-fx-opacity: 0;");
-		separator2.setStyle("-fx-opacity: 0;");
-		separator3.setStyle("-fx-opacity: 0;");
-		separator4.setStyle("-fx-opacity: 0;");
-		separator5.setStyle("-fx-opacity: 0;");
-		separator6.setStyle("-fx-opacity: 0;");
-		ImageView logo = new ImageView(new Image("http://www.spudgi.com/wp-content/uploads/2017/07/CST-Draft.png",400, 200, true, true));
+		Separator sep = new Separator();
+		Separator sep2 = new Separator();
+		Separator sep3 = new Separator();
+		Separator sep4 = new Separator();
+		Separator sep5 = new Separator();
+		Separator sep6 = new Separator();
+		sep.setStyle("-fx-opacity: 0;");
+		sep2.setStyle("-fx-opacity: 0;");
+		sep3.setStyle("-fx-opacity: 0;");
+		sep4.setStyle("-fx-opacity: 0;");
+		sep5.setStyle("-fx-opacity: 0;");
+		sep6.setStyle("-fx-opacity: 0;");
+		ImageView logo = new ImageView(new Image("http://www.spudgi.com/wp-content/uploads/2017/07/CST-Draft.png",500, 200, true, true));
 		logo.setStyle("-fx-opacity: .87");
-		@SuppressWarnings("rawtypes")
-		ChoiceBox listOfPostions = new ChoiceBox(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
-		listOfPostions.getSelectionModel().selectFirst();
-		listOfPostions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-			
-					@Override
-					public void changed(ObservableValue<? extends Number> observableValue,Number number, Number number2) {
-						managePlayerTable((int) number2);
-					}
-				});
+	
+		ChoiceBox<String> cb1 = new ChoiceBox<String>(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
+		cb1.getSelectionModel().selectFirst();
+		cb1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		
+			@Override
+			public void changed(ObservableValue<? extends Number> observableValue,Number number, Number number2) {
+				managePlayerTable((int) number2);
+			}
+		});
 
 		TextField searchField = new TextField("Search");
 		searchField.setPrefColumnCount(15);
-		searchField.focusedProperty().addListener(
-				new ChangeListener<Boolean>() {
-					@Override
-					public void changed(ObservableValue<? extends Boolean> arg0,Boolean arg1, Boolean arg2) {
-						if (searchField.getText().contains("Search")) {
-							searchField.setText("");
-						}
-					}
-				});
-		
-		Button searchBtn = new Button("search");
-		searchBtn.setOnAction(new EventHandler<ActionEvent>() {
+		searchField.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			
 			@Override
-			public void handle(ActionEvent e) {
-				if (searchField.getText() != ""|| searchField.getText() != "Search") {
-					searchManagementTable(searchField.getText());
+			public void changed(ObservableValue<? extends Boolean> arg0,Boolean arg1, Boolean arg2) {
+				if (searchField.getText().contains("Search")) {
+					searchField.setText("");
 				}
 			}
 		});
+	
+		Button searchBtn = new Button("search");
+		searchBtn.setOnAction(new EventHandler<ActionEvent>() {
 		
-		Button resetBtn = new Button("reset");
-		resetBtn.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0,Boolean arg1, Boolean arg2) {
-				searchField.setText("");
-				listOfPostions.getSelectionModel().selectFirst();
-				managePlayerTable(0);
+			public void handle(ActionEvent e) {
+				if (searchField.getText() != ""|| searchField.getText() != "Search") {
+					searchTable(searchField.getText());
+				}
 			}
 		});
-		
-		controls.getChildren().addAll(listOfPostions, searchField, searchBtn,resetBtn, separator, separator2, separator3, separator4,separator5, separator6, logo);
+	
+		controls.getChildren().addAll(cb1, searchField, searchBtn, sep, sep2, sep3, sep4, sep5, sep6, logo);
 		pane.setTop(controls);
 	}
 
 	public ObservableList<NFLPlayer> createPlayers() {
-		ArrayList<NFLPlayer> playerList = new ArrayList<NFLPlayer>();
+		ArrayList<NFLPlayer> newPlayers = new ArrayList<NFLPlayer>();
 
-		for (int x = 0; x < 200; x++) {
-			playerList.add(new OffensivePlayer());
+		for (int x = 0; x < 12; x++) {
+			newPlayers.add(new OffensivePlayer());
 		}
-		for (int y = 0; y < 200; y++) {
-			playerList.add(new DefensivePlayer());
+		for (int y = 0; y < 12; y++) {
+			newPlayers.add(new DefensivePlayer());
 		}
 
-		return FXCollections.observableList(playerList);
+		return FXCollections.observableList(newPlayers);
 	}
 
 	public static void main(String[] args) {

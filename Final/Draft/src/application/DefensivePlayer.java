@@ -5,113 +5,113 @@
 package application;
 
 public class DefensivePlayer extends NFLPlayer {
-	private String[] listOfPositions = {
-			"Cornerback","Defensive End","Defensive Tackle","Linebacker","Safety"
+	
+	private String[] defensivePlayers = {
+		"Cornerback","Defensive End","Defensive Tackle","Linebacker","Safety"
 	};
 	
 	String getName() { 
     	return Name; 
     }
     
-    void setName(String Name) { 
-    	this.Name = Name; 
+    void setName(String name) { 
+    	this.Name = name; 
     }
     
     String getNFLTeam() { 
     	return NFLTeam; 
     }
     
-    void setNFLTeam(String string) { 
-    	this.NFLTeam = string; 
+    void setNFLTeam(String team) { 
+    	this.NFLTeam = team; 
     }
     
     String getPosition() { 
     	return Position; 
     }
     
-    void setPosition(String Position) { 
-    	this.Position = Position; 
+    void setPosition(String position) { 
+    	this.Position = position; 
     }
     
     String getCollege() { 
     	return College; 
     }
     
-    void setCollege(String College) { 
-    	this.College = College; 
+    void setCollege(String college) { 
+    	this.College = college; 
     }
     
     public int getPower() { 
     	return Power; 
     }
     
-    public void setPower(int Power) { 
-    	this.Power = Power; 
+    public void setPower(int power) { 
+    	this.Power = power; 
     }
     
     public int getAgility() { 
     	return Agility; 
     }
     
-    public void setAgility(int Agility) { 
-    	this.Agility = Agility; 
+    public void setAgility(int agility) { 
+    	this.Agility = agility; 
     }
     
     public int getYards() { 
     	return Yardage; 
     }
     
-    public void setYards(int Yardage) { 
-    	this.Yardage = Yardage; 
+    public void setYards(int yardage) { 
+    	this.Yardage = yardage; 
     }
     
     public int getSpeed() { 
     	return Speed; 
     }
     
-    public void setSpeed(int Speed) { 
-    	this.Speed = Speed; 
+    public void setSpeed(int speed) { 
+    	this.Speed = speed; 
     }
     
     public int getFumbles() { 
     	return Fumbles; 
     }
     
-    public void setFumbles(int Fumbles) { 
-    	this.Fumbles = Fumbles; 
+    public void setFumbles(int fumbles) { 
+    	this.Fumbles = fumbles; 
     }
     
     public int getEvasive() { 
     	return Evasive; 
     }
     
-    public void setEvasive(int Evasive) { 
-    	this.Evasive = Evasive; 
+    public void setEvasive(int evasive) { 
+    	this.Evasive = evasive; 
     }
     
     public int getHands() { 
     	return Hands; 
     }
     
-    public void setHands(int Hands) { 
-    	this.Hands = Hands; 
+    public void setHands(int hands) { 
+    	this.Hands = hands; 
     }
     
     public int getBlocking() { 
     	return Blocking; 
     }
     
-    public void setBlocking(int Blocking) { 
-    	this.Blocking = Blocking; 
+    public void setBlocking(int blocking) { 
+    	this.Blocking = blocking; 
     }
     
     public int getCoverage() { 
     	return Coverage; 
     }
     
-    public void setCoverage(
-    		int Coverage) { 
-    	this.Coverage = Coverage; 
+    public void setCoverage(int coverage) { 
+    	this.Coverage = coverage; 
     }
     
     public int getOverall() {
@@ -123,10 +123,26 @@ public class DefensivePlayer extends NFLPlayer {
     }
 	
 	public DefensivePlayer() {
-		setName(firstNames[randNum(0, 99)] + "" + lastNames[randNum(0, 99)]);
-    	setPosition(listOfPositions[randNum(0, 5)]);
+		setName(firstNames[randNum(0, 99)] + " " + lastNames[randNum(0, 99)]);
+    	setPosition(defensivePlayers[randNum(0, 5)]);
     	setNFLTeam("2018 Prospects");
     	setCollege(playerCollege[randNum(0, 45)]);
+    	setPower(randNum(1,100));
+    	setAgility(randNum(1,100));
+    	setYards(randNum(1,100));
+    	setSpeed(randNum(1,100));
+    	setFumbles(randNum(1,100));
+    	setEvasive(randNum(1,100));
+    	setHands(randNum(1,100));
+    	setBlocking(randNum(1,100));
+    	setCoverage(randNum(1,100));
+    }
+	
+	public DefensivePlayer(String Position) {
+		setName(firstNames[randNum(0, 99)] + " " + lastNames[randNum(0, 99)]);
+    	setPosition(Position);
+    	setNFLTeam("2018 Prospects");
+    	setCollege(playerCollege[randNum(0, 44)]);
     	setPower(randNum(1,100));
     	setAgility(randNum(1,100));
     	setYards(randNum(1,100));

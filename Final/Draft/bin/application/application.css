@@ -1,13 +1,13 @@
 /*Caleb Miller
-	//20170730
-		//This is my own product/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+	20170730
+		This is my own product*/
+#primaryStage {
+	-fx-background-color: blue;
+}
 table-row-cell{
     -fx-background-color: -fx-table-cell-border-color, #FFFFFF;
 }
 
 .table-row-cell:odd{
-    -fx-background-color: -fx-table-cell-border-color, #000000;
-}
-#scene {
-	-fx-background-color: blue;
+    -fx-background-color: -fx-table-cell-border-color, #0254d8;
 }
