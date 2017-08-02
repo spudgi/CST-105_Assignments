@@ -6,7 +6,7 @@ package application;
 
 public class OffensivePlayer extends NFLPlayer {
 	
-	private String[] offensivePlayers = {
+	private String[] posPlayers = {
 		"Center","Kicker","Guard","Punter","Quarterback","Running Back","Tight End","Wide Receiver"
 	};
 	
@@ -14,32 +14,32 @@ public class OffensivePlayer extends NFLPlayer {
     	return Name; 
     }
     
-    void setName(String name) { 
-    	this.Name = name; 
+    void setName(String Name) { 
+    	this.Name = Name; 
     }
     
     String getNFLTeam() { 
     	return NFLTeam; 
     }
     
-    void setNFLTeam(String team) { 
-    	this.NFLTeam = team; 
+    void setNFLTeam(String NFL_Team) { 
+    	this.NFLTeam = NFL_Team; 
     }
     
     String getPosition() { 
     	return Position; 
     }
     
-    void setPosition(String position) { 
-    	this.Position = position; 
+    void setPosition(String Position) { 
+    	this.Position = Position; 
     }
     
     String getCollege() { 
     	return College; 
     }
     
-    void setCollege(String college) { 
-    	this.College = college; 
+    void setCollege(String College) { 
+    	this.College = College; 
     }
     
     public int getPower() { 
@@ -124,7 +124,7 @@ public class OffensivePlayer extends NFLPlayer {
 	
     public OffensivePlayer() {
 		setName(firstNames[randNum(0, 99)] + "" + lastNames[randNum(0, 99)]);
-    	setPosition(offensivePlayers[randNum(0, 5)]);
+    	setPosition(posPlayers[randNum(0, 5)]);
     	setNFLTeam("2018 Prospects");
     	setCollege(playerCollege[randNum(0, 44)]);
     	setPower(randNum(1,100));

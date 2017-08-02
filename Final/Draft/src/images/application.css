@@ -1,0 +1,13 @@
+/*Caleb Miller
+	20170730
+		This is my own product*/
+.root {
+	-fx-background-color: #00395c;
+}
+table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #84d0ff;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #a0dafd;
+}
