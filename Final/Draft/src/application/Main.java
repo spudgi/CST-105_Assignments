@@ -39,7 +39,7 @@ public class Main extends Application {
 		BorderPane pane = new BorderPane();
 		
 		table.setEditable(false);
-		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 		table = PlayerTable(table);
 
 		final VBox playerTable = new VBox();
@@ -81,9 +81,12 @@ public class Main extends Application {
 			
 		TableColumn<NFLPlayer, String> teamList = new TableColumn<>("NFL Teams");
 		
-		teamList.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("NFLTeam"));
+		teamList.setCellValueFactory(new PropertyValueFactory<NFLPlayer, String>("NFL_Team"));
 
-		table.getColumns().addAll(nameList, posList, collegeList, teamList);
+		table.getColumns().add(nameList);
+		table.getColumns().add(posList);
+		table.getColumns().add(collegeList);
+		table.getColumns().add(teamList);
 		
 		
 		return table;
@@ -110,7 +113,9 @@ public class Main extends Application {
 		ImageView logo = new ImageView(new Image("/images/CST-Draft1.PNG",500, 200, true, true));
 		logo.setStyle("-fx-opacity: .87");
 		
-		ChoiceBox<String> cb = new ChoiceBox<String>(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
+		ChoiceBox<String> choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
+		@SuppressWarnings("rawtypes")
+		ChoiceBox cb = choiceBox;
 		cb.getSelectionModel().selectFirst();
 		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 	
@@ -138,7 +143,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				if (searchField.getText() != ""|| searchField.getText() != "Search") {
-					searchPlayerTable(searchField.getText());
+					playerSearch(searchField.getText());
 				}
 			}
 		});
@@ -149,127 +154,127 @@ public class Main extends Application {
 	
 	public void updatePlayerTable(int i) {
 		
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(prospectPlayer, p -> true);
+		FilteredList<NFLPlayer> fPlayers = new FilteredList<>(prospectPlayer, p -> true);
 		
 		switch (i) {
 		case 0:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> true);
+			fPlayers = new FilteredList<>(prospectPlayer, p -> true);
 			break;
 		case 1:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Center");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Center");
 			break;
 		case 2:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Cornerback");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Cornerback");
 			break;
 		case 3:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive End");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive End");
 			break;
 		case 4:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive Tackle");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive Tackle");
 			break;
 		case 5:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Kicker");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Kicker");
 			break;
 		case 6:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Guard");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Guard");
 			break;
 		case 7:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Linebacker");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Linebacker");
 			break;
 		case 8:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Offensive Tackle");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Offensive Tackle");
 			break;
 		case 9:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Punter");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Punter");
 			break;
 		case 10:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Quarterback");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Quarterback");
 			break;
 		case 11:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Running Back");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Running Back");
 			break;
 		case 12:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Safety");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Safety");
 			break;
 		case 13:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Tight End");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Tight End");
 			break;
 		case 14:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Wide Receiver");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Wide Receiver");
 			break;
 		}
 
-		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(filteredPlayers);
+		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(fPlayers);
 		table.setItems(sortedPlayers);
 		table.refresh();
 	}
 	
 	public void myPlayerTable(int i) {
 		
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getNFLTeam() == "Drafted");
+		FilteredList<NFLPlayer> fPlayers = new FilteredList<>(prospectPlayer, p -> p.getNFLTeam() == "Drafted");
 
 		switch (i) {
 		case 0:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getNFLTeam() == "Drafted");
 			break;
 		case 1:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Center"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Center"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 2:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Cornerback"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Cornerback"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 3:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive End"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive End"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 4:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive Tackle"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Defensive Tackle"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 5:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Kicker"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Kicker"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 6:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Guard"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Guard"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 7:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Linebacker"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Linebacker"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 8:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Offensive Tackle"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Offensive Tackle"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 9:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Punter"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Punter"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 10:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Quarterback"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Quarterback"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 11:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Running Back"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Running Back"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 12:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Safety"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Safety"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 13:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Tight End"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Tight End"&& p.getNFLTeam() == "Drafted");
 			break;
 		case 14:
-			filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Wide Receiver"&& p.getNFLTeam() == "Drafted");
+			fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition() == "Wide Receiver"&& p.getNFLTeam() == "Drafted");
 			break;
 		}
 
-		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(filteredPlayers);
+		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(fPlayers);
 		table.setItems(sortedPlayers);
 		table.refresh();
 	}
 	
-	public void searchPlayerTable(String s) {
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getName() || p.getPosition() || p.getCollege() ||  p.getNFLTeam());
-		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(filteredPlayers);
+	public void playerSearch(String s) {
+		FilteredList<NFLPlayer> fPlayers = new FilteredList<>(prospectPlayer, p -> p.getPosition().toLowerCase().contains(s.toLowerCase())|| p.getCollege().toLowerCase().contains(s.toLowerCase())|| p.getName().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam().toLowerCase().contains(s.toLowerCase()));
+		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(fPlayers);
 		table.setItems(sortedPlayers);
 	}
 
-	public void searchTable(String s) {
-		FilteredList<NFLPlayer> filteredPlayers = new FilteredList<>(prospectPlayer, p -> p.getNFLTeam() == "Drafted"&& p.getPosition().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getCollege().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getName().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getNFLTeam().toLowerCase().contains(s.toLowerCase()));
-		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(filteredPlayers);
+	public void tableSearch(String s) {
+		FilteredList<NFLPlayer> fPlayers = new FilteredList<>(prospectPlayer, p -> p.getNFLTeam() == "Drafted"&& p.getPosition().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getCollege().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getName().toLowerCase().contains(s.toLowerCase())|| p.getNFLTeam() == "Drafted"&& p.getNFLTeam().toLowerCase().contains(s.toLowerCase()));
+		SortedList<NFLPlayer> sortedPlayers = new SortedList<>(fPlayers);
 		table.setItems(sortedPlayers);
 	}
 	
@@ -396,7 +401,7 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				if (searchField.getText() != ""|| searchField.getText() != "Search") {
-					searchTable(searchField.getText());
+					tableSearch(searchField.getText());
 				}
 			}
 		});
@@ -408,10 +413,10 @@ public class Main extends Application {
 	public ObservableList<NFLPlayer> createPlayers() {
 		ArrayList<NFLPlayer> posPlayers = new ArrayList<NFLPlayer>();
 
-		for (int x = 0; x < 12; x++) {
+		for (int x = 0; x < 13; x++) {
 			posPlayers.add(new OffensivePlayer());
 		}
-		for (int y = 0; y < 12; y++) {
+		for (int y = 0; y < 13; y++) {
 			posPlayers.add(new DefensivePlayer());
 		}
 
