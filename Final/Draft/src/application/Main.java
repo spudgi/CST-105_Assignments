@@ -39,7 +39,7 @@ public class Main extends Application {
 		BorderPane pane = new BorderPane();
 		
 		table.setEditable(false);
-		table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		table = PlayerTable(table);
 
 		final VBox playerTable = new VBox();
@@ -51,9 +51,9 @@ public class Main extends Application {
 		pane.setCenter(playerTable);
 		pane.setBottom(draftControls(pane));
 
-		Scene scene = new Scene(pane, 1200, 750);
+		Scene scene = new Scene(pane, 1332, 580);
 		scene.getStylesheets().add("/images/application.css");
-		primaryStage.setResizable(false);
+		primaryStage.setResizable(true);
 		primaryStage.setTitle("NFL Draft");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -113,15 +113,13 @@ public class Main extends Application {
 		ImageView logo = new ImageView(new Image("/images/CST-Draft1.PNG",500, 200, true, true));
 		logo.setStyle("-fx-opacity: .87");
 		
-		ChoiceBox<String> choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
-		@SuppressWarnings("rawtypes")
-		ChoiceBox cb = choiceBox;
+		ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
 		cb.getSelectionModel().selectFirst();
 		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 	
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-				updatePlayerTable((int) number2);
+				updatePlayerTable((int) number);
 			}
 		});
 
@@ -290,7 +288,8 @@ public class Main extends Application {
 			public void handle(ActionEvent e) {
 				NFLPlayer draftPlayer = table.getSelectionModel().getSelectedItem();
 				draftPlayer.setNFLTeam("2018 Prospects");
-				myPlayerTable(0);
+				updatePlayerTable(0);
+				
 			}
 		});
 		
@@ -306,8 +305,9 @@ public class Main extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				createControls(pane);
+				myPlayerTable(0);
 				pane.setBottom(draftControls(pane));
-				updatePlayerTable(0);
+				
 			}
 		});
 		
@@ -373,9 +373,9 @@ public class Main extends Application {
 		ImageView logo = new ImageView(new Image("/images/CST-Draft1.PNG",500, 200, true, true));
 		logo.setStyle("-fx-opacity: .87");
 	
-		ChoiceBox<String> cb1 = new ChoiceBox<String>(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
-		cb1.getSelectionModel().selectFirst();
-		cb1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList("Center","Cornerback","Defensive End","Defensive Tackle","Kicker","Guard","Linebacker","Offensive Tackle","Punter","Quarterback","Running Back","Safety","Tight End","Wide Receiver"));
+		cb.getSelectionModel().selectFirst();
+		cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 		
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue,Number number, Number number2) {
@@ -406,17 +406,17 @@ public class Main extends Application {
 			}
 		});
 	
-		controls.getChildren().addAll(cb1, searchField, searchBtn, sep, sep2, sep3, sep4, sep5, sep6, logo);
+		controls.getChildren().addAll(cb, searchField, searchBtn, sep, sep2, sep3, sep4, sep5, sep6, logo);
 		pane.setTop(controls);
 	}
 
 	public ObservableList<NFLPlayer> createPlayers() {
 		ArrayList<NFLPlayer> posPlayers = new ArrayList<NFLPlayer>();
 
-		for (int x = 0; x < 13; x++) {
+		for (int x = 0; x < 20; x++) {
 			posPlayers.add(new OffensivePlayer());
 		}
-		for (int y = 0; y < 13; y++) {
+		for (int y = 0; y < 20; y++) {
 			posPlayers.add(new DefensivePlayer());
 		}
 
